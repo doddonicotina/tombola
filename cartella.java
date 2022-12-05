@@ -4,6 +4,8 @@ public class Cartella {
 	
 	int [][] cartella = new int [3][9];
 	Random rand = new Random();
+	int []numeri=new int[15];
+	int contatore=0;
 	
 	public Cartella() 
 	{
@@ -16,12 +18,37 @@ public class Cartella {
 		}
 		
 		for (int i = 0; i<3; i++)
-		{
+		{	
+
 			int [] vet = sceltaBuchi();
+			
 			for (int j = 0; j<vet.length; j++)
 			{
-				cartella[i][vet[j]]=rand.nextInt(vet[j]*10, vet[j]*10+9);
+				int num = 0;
+					if(vet[j]==0){
+						do 
+						{
+							num=rand.nextInt(1,9);
+						}while (contains(numeri, num));
+						
+						cartella[i][vet[j]]=num;
+						numeri[contatore]=num;
+						contatore++;
+						}
+					else 
+					{
+						do 
+						{
+							num=rand.nextInt(vet[j]*10, vet[j]*10+9);
+						}while (contains(numeri, num));
+						
+						cartella[i][vet[j]]=num;
+						numeri[contatore]=num;
+						contatore++;
+					}
+					
 			}
+		
 		}
 		
 	}
@@ -29,23 +56,49 @@ public class Cartella {
 	public int[] sceltaBuchi()
 	{
 		int [] vet = new int[5];
-		
 		for (int i=0; i<vet.length;i++)
 		{
-			//aggiungere controllo
-			vet[i] = rand.nextInt(9);
+			vet[i]=-1;
 		}
+		int var=0;
+		for (int i=0; i<vet.length;i++)
+		{
+			do {
+				var= rand.nextInt(9);
+			}while (contains(vet, var));
+			vet[i]=var;
+		}
+		
 		return vet;
 	}
 	
 	public void print()
 	{
         for (int i = 0; i < cartella.length; i++) {
-        	System.out.println();
-     
+        	
+        	
+        	System.out.println("+-------+-------+-------+-------+-------+-------+-------+-------+-------+");
             for (int j = 0; j < cartella[i].length; j++)
-                System.out.print(cartella[i][j] + " ");
-	}}
+            {
+            	System.out.printf("|");
+                System.out.printf(cartella[i][j] + "\t");
+            } 
+            System.out.println("|");
+	}
+        System.out.println("+-------+-------+-------+-------+-------+-------+-------+-------+-------+");
+        }
+	
+	public boolean contains(int vet[],int rand)
+	{
+		for (int i=0;i<vet.length;i++)
+		{
+			 if (vet[i] == rand)
+			 {
+				 return true;
+			 }
+		}
+		return false;
+	}
 }
  
 
