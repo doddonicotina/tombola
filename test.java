@@ -1,3 +1,5 @@
+package tombola;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -6,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JTextField;
 import javax.swing.plaf.InsetsUIResource;  
     
@@ -26,30 +29,36 @@ public class test extends Canvas{
             scelta.setBounds(20,80, 900,50);  
             scelta.setFont(new Font(Font.SANS_SERIF, Font.BOLD,25));
 
-            ncartelle = new JLabel("Quante cartelle vuoi usare (max: 3)");
+            ncartelle = new JLabel("Quante cartelle vuoi usare ");
             ncartelle.setBounds(20,120,300,50);  
             ncartelle.setFont(new Font(Font.SANS_SERIF, Font.PLAIN,15));
             ncartelle.setVisible(false);
             
-            final DefaultListModel<String> l1 = new DefaultListModel<>();  
+            JButton bu = new JButton("Ok");
+            bu.setBounds(400, 120, 50, 50);
+            bu.setMargin(buttonmargin);
+            bu.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
+            bu.setBackground(Color.WHITE);
+            bu.setVisible(false);
+           
+            final DefaultListModel<String> l1 = new DefaultListModel<>(); 
             l1.addElement("1");  
             l1.addElement("2");  
-            l1.addElement("3");  
-            l1.addActionListener(new ActionListener()
+            l1.addElement("3"); 
+            final JList<String> list1 = new JList<>(l1);
+            list1.setBounds(250, 120, 100, 55);
+            list1.setVisible(false);
+             
+            bu.addActionListener(new ActionListener()
             {
                 public void actionPerformed(ActionEvent e)
                 {  
-                      int n = Integer.parseInt(num.getText());
-                      if (n<=3)
-                      {
-                        //qua devo mettere le cartelle
-                      }
-                      else
-                      {
-                        new alert();
-                      }
-                    
-                }  
+                	if (list1.getSelectedValue()=="1")
+                	{
+                		Cartella c = new Cartella();
+                		//creo una  cartella
+                	}
+               	}  
             });
 
             JButton cartella = new JButton("cartella");
@@ -59,12 +68,15 @@ public class test extends Canvas{
             cartella.setBounds(600, 95, 69, 25);
             cartella.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
             cartella.setBackground(Color.WHITE);
+            
             cartella.addActionListener(new ActionListener()
             {  
                 public void actionPerformed(ActionEvent e)
                 {  
                       ncartelle.setVisible(true);
-                      num.setVisible(true);    
+                      list1.setVisible(true);
+                      bu.setVisible(true);
+                          
                 }  
             });  
 
@@ -76,21 +88,24 @@ public class test extends Canvas{
             {  
                 public void actionPerformed(ActionEvent e)
                 {  
-                      ncartelle.setVisible(true);  
+                      ncartelle.setVisible(true);
+                      
                       
                 }  
             });  
-
-
+            f.add(bu);
+            f.add(list1);
             f.add(ncartelle);
-            f.add(num);
+           // f.add(num);
             f.add(tombola); 
             f.add(scelta); 
             f.add(cartella);
             f.add(tombolone);
             f.setSize(900,900);  
             f.setLayout(null);  
-            f.setVisible(true);  
+            f.setVisible(true);
+            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
     }  
   
