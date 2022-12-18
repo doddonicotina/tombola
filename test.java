@@ -2,6 +2,7 @@ package tombola;
 
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.ImageIcon;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -13,9 +14,13 @@ import javax.swing.JTextField;
 import javax.swing.plaf.InsetsUIResource;  
     
 public class test extends Canvas{  
-        public static void main(String[] args) { 
+        public static void main(String[] args) {
             Insets buttonmargin = new InsetsUIResource(0, 0, 0, 0);
-
+            /* 
+            ImageIcon doddoImage = new ImageIcon("p3.png");
+            JLabel label = new JLabel(doddoImage);
+            label.setBounds(20, 20, 200, 200);
+            */
             JFrame f= new JFrame("Tombola");  
             f.setBackground(Color.white);
 
@@ -55,9 +60,17 @@ public class test extends Canvas{
                 {  
                 	if (list1.getSelectedValue()=="1")
                 	{
-                		Cartella c = new Cartella();
-                		//creo una  cartella
-                	}
+                		cartella c = new cartella();
+                	}else if(list1.getSelectedValue()=="2")
+                    {
+                        cartella a = new cartella();
+                        cartella b = new cartella();
+                    }else if(list1.getSelectedValue()=="3")
+                    {
+                        cartella a = new cartella();
+                        cartella b = new cartella();
+                        cartella c = new cartella();
+                    }
                	}  
             });
 
@@ -88,11 +101,12 @@ public class test extends Canvas{
             {  
                 public void actionPerformed(ActionEvent e)
                 {  
-                      ncartelle.setVisible(true);
+                      Tombolone t = new Tombolone();
                       
                       
                 }  
             });  
+           // f.add(label);
             f.add(bu);
             f.add(list1);
             f.add(ncartelle);

@@ -12,28 +12,22 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTextField;
 import javax.swing.plaf.InsetsUIResource;  
-public class Cartella extends Canvas implements ActionListener {
+public class cartella {
 	
 	int [][] cartella = new int [3][9];
 	JButton[][] ma = new JButton[3][9];
+	ImageIcon doddo = new ImageIcon ("doddo.png");
+	ImageIcon gio = new ImageIcon ("gio.png");
+	
+
+
+
 	JFrame f = new JFrame ("Cartella");
 	Random rand = new Random();
 	int []numeri=new int[15];
 	int contatore=0;
 	
-	
-	ActionListener listener = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (e.getSource() instanceof JButton) {
-            	JLabel label = new JLabel(); //JLabel Creation
-                label.setIcon(new ImageIcon("doddo.png")); //Sets the image to be displayed as an icon
-                label.setBounds(100, 100, 200, 200);
-                f.add(label);
-            }
-        }
-    };
-	public Cartella() 
+	public cartella() 
 	{
 		for (int i = 0; i<3; i++)
 		{
@@ -76,67 +70,52 @@ public class Cartella extends Canvas implements ActionListener {
 			}
 		
 		}
-		
-		
-        
-        
-        Insets buttonmargin = new InsetsUIResource(0, 0, 0, 0);
-
+		Insets buttonmargin = new InsetsUIResource(0, 0, 0, 0);
         for (int i=0; i<3;i++) {
         	for (int j=0; j<9; j++) {
         		ma[i][j] = new JButton();
         		ma[i][j].setMargin(buttonmargin);
         		ma[i][j].setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
         		ma[i][j].setBackground(Color.WHITE);
+				if (cartella[i][j]==0)
+				{
+					ma[i][j].setText("");
+
+				}else
+				{
         		ma[i][j].setText(Integer.toString(cartella[i][j]));
-        		ma[i][j].addActionListener(listener);
+				}
+				int x = i;
+				int y = j;
+				Random n = new Random();
+				ma[i][j].addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
+					{  
+
+						System.out.println("ss");
+						
+						if (n.nextBoolean())
+						{
+							ma[x][y].setText("");
+							ma[x][y].setIcon(doddo);	
+						}else
+						{
+							ma[x][y].setText("");
+							ma[x][y].setIcon(gio);
+						}
+						
+						
+					}  
+				});
         		f.add(ma[i][j]);
         	}
-        }
-        
-        ImageIcon doddo = new ImageIcon("doddo.png");
-        ImageIcon gio = new ImageIcon("gio.png");
-        ma[0][0].setIcon(doddo);
-        /*
-        ma[0][0].addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent e)
-                {  
-                	ImageIcon doddo = new ImageIcon("doddo.png");
-                    ImageIcon gio = new ImageIcon("gio.png");
-
-                    for (int i=0; i<3;i++) {
-                    	for (int j=0; j<9; j++) {
-                    			if (e.getSource()==ma[i][j]) {
-                    				ma[i][j].setIcon(doddo);
-                    			}
-                    		}
-                    	}
-               	}  
-            });*/
-        
-        f.setBackground(Color.white);
-        f.setSize(900,400);  
-        f.setVisible(true);  
-        f.setLayout(new GridLayout(3,8));
-        
-        
-		
+			f.setBackground(Color.white);
+			f.setSize(900,400);  
+			f.setVisible(true);  
+			f.setLayout(new GridLayout(3,8));
 	}
-	/*
-	@Override
-	public void actionPerformed (ActionEvent e) {
-		ImageIcon doddo = new ImageIcon("doddo.png");
-        ImageIcon gio = new ImageIcon("gio.png");
-
-        for (int i=0; i<3;i++) {
-        	for (int j=0; j<9; j++) {
-        			if (e.getSource()==ma[i][j]) {
-        				ma[i][j].setIcon(doddo);
-        			}
-        		}
-        	}
-	}*/
+	}
 	
 	public int[] sceltaBuchi()
 	{
@@ -184,12 +163,6 @@ public class Cartella extends Canvas implements ActionListener {
 		}
 		return false;
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 }
- 
+
 
